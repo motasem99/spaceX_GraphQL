@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import Moment from 'react-moment';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const LaunchItem = ({ launch }) => {
+  const history = useHistory();
   return (
     <div className='card card-body mb-3'>
       <div className='row'>
@@ -27,12 +28,17 @@ const LaunchItem = ({ launch }) => {
           </p>
         </div>
         <div className='col-md-3'>
-          <Link
-            to={`/launch/${launch.flight_number}`}
+          <button
             className='btn btn-secondary'
+            onClick={() => {
+              history.push({
+                pathname: '/launch',
+                search: `?number=${launch.flight_number}`,
+              });
+            }}
           >
             Launch Details
-          </Link>
+          </button>
         </div>
       </div>
     </div>
